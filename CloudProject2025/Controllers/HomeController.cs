@@ -23,6 +23,11 @@ namespace CloudProject2025.Controllers
             return View();
         }
 
+        public IActionResult Films()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
