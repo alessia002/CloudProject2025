@@ -2,6 +2,8 @@ using CloudProject2025.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+
+
 namespace CloudProject2025.Controllers
 {
     public class HomeController : Controller

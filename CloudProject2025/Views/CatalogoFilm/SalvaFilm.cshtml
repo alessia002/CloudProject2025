@@ -1,0 +1,27 @@
+﻿@model CatalogoFilmSalvaFilmViewModel
+
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Salva Film</title>
+</head>
+<body>
+    <form action="" method="post">
+
+        @Html.HiddenFor(s => s.NuovoFilm)
+
+        <label>Nome</label>
+        @Html.EditorFor(s => s.FilmDaSalvare.Name)
+        <br />
+        <label>Genre</label>
+        @Html.EditorFor(s => s.FilmDaSalvare.Genre)
+        <br />
+
+     
+        <button type="submit">Salvato!</button>
+    </form>
+</body>
+</html>

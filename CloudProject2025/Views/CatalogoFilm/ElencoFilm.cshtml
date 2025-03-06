@@ -1,0 +1,47 @@
+﻿@model CatalogoFilmElencoFilmViewModel;
+
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Elenco Film</title>
+</head>
+<body>
+    
+    <a href="/CatalogoFilm/SalvaFilm">Inserisci nuovo film</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Plot</th>
+                <th>Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ElencoFilm.ListaFilm.Count() > 0)
+            {
+                @foreach (var film in Model.ElencoFilm.ListaFilm.OrderBy(s => s.Name))
+                {
+                    <tr>
+                        <td><a href="/CatalogoFilm/SalvaFilm?Id=@film.Id">Modifica</a></td>
+                        <td>@film.Name</td>
+                        <td>@film.Plot</td>
+                        <td>@film.Genre</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">Non ci sono film</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</body>
+</html>

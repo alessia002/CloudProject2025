@@ -13,7 +13,7 @@ namespace CloudProject2025.Models
         public string? Genre{ get; set; }
         [Required]
         public string? Director{ get; set; }
-        public Boolean? Awards { get; set; }
+        public bool Awards { get; set; }
         public float? MyRate{ get; set; }
 
 
