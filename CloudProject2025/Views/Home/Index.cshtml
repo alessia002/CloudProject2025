@@ -1,8 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Cerca un Film";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <a asp-controller="CatalogoFilm" asp-action="Films"> ciao </a>
-</div>
+<h2>Cerca un Film</h2>
+
+<form asp-controller="CatalogoFilm" asp-action="Search" method="post">
+    <input type="text" name="title" placeholder="Inserisci il titolo..." required />
+    <button type="submit">Cerca</button>
+</form>
+

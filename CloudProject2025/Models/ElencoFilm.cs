@@ -41,7 +41,7 @@ namespace CloudProject2025.Models
             return filmTrovati.ToArray();
         }
 
-        public Film[] FilmPerData(DateTime released)
+        public Film[] FilmPerData(String released)
         {
             return ListaFilm.Where(s => s.Released == released).ToArray();
         }

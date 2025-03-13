@@ -1,7 +1,14 @@
+using CloudProject2025.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<OmdbService>();
+
+// Legge il file appsettings.json
+builder.Services.AddSingleton<OmdbService>();
+builder.Services.AddHttpClient<OmdbService>();
 
 var app = builder.Build();
 
