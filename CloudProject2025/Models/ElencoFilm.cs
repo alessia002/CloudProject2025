@@ -32,7 +32,7 @@ namespace CloudProject2025.Models
         {
             List<Film> filmTrovati;
 
-            filmTrovati = ListaFilm.Where(s => s.Name.Contains(parametroRicerca)
+            filmTrovati = ListaFilm.Where(s => s.Title.Contains(parametroRicerca)
                                                 || s.Genre.Contains(parametroRicerca)
                                                 || s.Plot.Contains(parametroRicerca)
                                                 || s.Director.Contains(parametroRicerca))
@@ -41,9 +41,9 @@ namespace CloudProject2025.Models
             return filmTrovati.ToArray();
         }
 
-        public Film[] FilmPerData(String released)
+        public Film[] FilmPerData(int released)
         {
-            return ListaFilm.Where(s => s.Released == released).ToArray();
+            return ListaFilm.Where(s => s.Year == released).ToArray();
         }
 
 

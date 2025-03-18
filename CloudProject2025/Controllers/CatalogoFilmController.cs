@@ -59,9 +59,9 @@ public class CatalogoFilmController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Search(string title)
+    public async Task<IActionResult> Search(string title, int year)
     {
-        var film = await _omdbService.GetFilmAsync(title);
+        var film = await _omdbService.GetFilmAsync(title, year);
 
         if (film == null)
         {

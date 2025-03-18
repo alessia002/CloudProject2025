@@ -2,10 +2,16 @@
     ViewData["Title"] = "Cerca un Film";
 }
 
-<h2>Cerca un Film</h2>
+<div class="container d-flex justify-content-center mt-5">
+    <div class="p-4 bg-light border rounded shadow-lg" style="max-width: 600px; width: 100%;">
+        <h2 class="mb-4 text-dark text-center">Cerca un Film</h2>
 
-<form asp-controller="CatalogoFilm" asp-action="Search" method="post">
-    <input type="text" name="title" placeholder="Inserisci il titolo..." required />
-    <button type="submit">Cerca</button>
-</form>
-
+        <form asp-controller="CatalogoFilm" asp-action="Search" method="post">
+            <div class="input-group">
+                <input type="text" name="title" class="form-control border-primary" placeholder="Inserisci il titolo... *" required />
+                <input type="number" name="year" class="form-control border-primary" placeholder="Inserisci anno..." />
+                <button type="submit" class="btn btn-primary">Cerca</button>
+            </div>
+        </form>
+    </div>
+</div>
