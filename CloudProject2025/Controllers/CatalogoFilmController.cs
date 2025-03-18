@@ -23,40 +23,8 @@ public class CatalogoFilmController : Controller
     }
 
 
-    [HttpGet]
-    public IActionResult SalvaFilm(int Id)
-    {
-        CatalogoFilmSalvaFilmViewModel vm = new CatalogoFilmSalvaFilmViewModel();
-            
-        if (Id == 0)
-        {
-            vm.FilmDaSalvare = new Models.Film();
-            vm.NuovoFilm = true;
-        }
-        else
-        {
-            //vm.FilmDaSalvare = MemoriaStatica.ElencoFilm.DaiPersonaDaNumeroDiTelefono(NumeroDiTelefono);
-            vm.NuovoFilm = false;
-        }
-            
-        return View(vm);
-    }
+   
     
-    [HttpPost]
-    public IActionResult SalvaFilm(Film FilmDaSalvare, bool NuovoFilm)
-    {
-        if (NuovoFilm == true)
-        {
-            MemoriaStatica.ElencoFilm.AggiungiFilm(FilmDaSalvare);
-        }
-        else
-        {
-            MemoriaStatica.ElencoFilm.EliminaFilm(FilmDaSalvare);
-            MemoriaStatica.ElencoFilm.AggiungiFilm(FilmDaSalvare);
-        }
-
-        return Redirect("/CatalogoFilm/CatalogoFilm");
-    }
 
     [HttpPost]
     public async Task<IActionResult> Search(string title, int year)
@@ -68,7 +36,7 @@ public class CatalogoFilmController : Controller
             return NotFound("Film non trovato");
         }
 
-        var viewModel = new CatalogoFilmElencoFilmViewModel
+        var viewModel = new CatalogoFilmRicercaFilmViewModel
         {
             ElencoFilm = new ElencoFilm
             {
@@ -77,7 +45,7 @@ public class CatalogoFilmController : Controller
             }
         };
 
-        return View("CatalogoFilm", viewModel);
+        return View("RicercaFilm", viewModel);
     }
 
 }

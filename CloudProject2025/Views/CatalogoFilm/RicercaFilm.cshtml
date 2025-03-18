@@ -1,0 +1,51 @@
+﻿@model CatalogoFilmRicercaFilmViewModel
+
+@{
+    ViewData["Title"] = "Ricerca film";
+}
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="p-4 bg-light border rounded shadow-lg" style="max-width: 900px; width: 100%;">
+        <h1 class="text-dark text-center">@Model.ElencoFilm.NomeElenco</h1>
+
+        <table class="table border border-primary table-striped">
+            <thead class="bg-primary text-white">
+            <tr>
+                <th> </th>
+                <th>Titolo</th>
+                <th>Trama</th>
+                <th>Anno</th>
+                <th>Genere</th>
+                <th>Regista</th>
+               
+            </tr>
+            </thead>
+            <tbody>
+                @if (Model.ElencoFilm.ListaFilm.Any())
+                {
+                    @foreach (var film in Model.ElencoFilm.ListaFilm.OrderBy(s => s.Title))
+                    {
+                            <tr>
+                                <td>
+                                    <a href="/CatalogoFilm/CatalogoFilm?Id=@film.Id" class="btn btn-warning btn-sm"> + </a>
+                                </td>
+                                <td class="text-dark">@film.Title</td>
+                                <td class="text-dark">@film.Plot</td>
+                                <td class="text-dark">@film.Genre</td>
+                                <td class="text-dark">@film.Year</td>
+                                <td class="text-dark">@film.Director</td>
+                             
+
+                            </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-dark">Non ci sono film disponibili</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

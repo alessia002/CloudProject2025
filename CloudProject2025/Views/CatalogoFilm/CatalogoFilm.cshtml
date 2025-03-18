@@ -1,20 +1,22 @@
 ﻿@model CatalogoFilmElencoFilmViewModel
-
 @{
     ViewData["Title"] = "Catalogo film";
 }
 
 <div class="container mt-5 d-flex justify-content-center">
     <div class="p-4 bg-light border rounded shadow-lg" style="max-width: 900px; width: 100%;">
-        <h1 class="text-dark text-center">@Model.ElencoFilm.NomeElenco</h1>
+        <h1 class="text-dark text-center">Catalogo</h1>
 
         <table class="table border border-primary table-striped">
             <thead class="bg-primary text-white">
             <tr>
-                <th>Azioni</th>
-                <th>Nome</th>
+                
+                <th>Titolo</th>
                 <th>Trama</th>
+                <th>Anno</th>
                 <th>Genere</th>
+                <th>Regista</th>
+                <th>Valutazione</th>
             </tr>
             </thead>
             <tbody>
@@ -23,12 +25,14 @@
                 @foreach (var film in Model.ElencoFilm.ListaFilm.OrderBy(s => s.Title))
                 {
                     <tr>
-                        <td>
-                            <a href="/CatalogoFilm/CatalogoFilm?Id=@film.Id" class="btn btn-warning btn-sm"> + </a>
-                        </td>
+                       
                         <td class="text-dark">@film.Title</td>
                         <td class="text-dark">@film.Plot</td>
                         <td class="text-dark">@film.Genre</td>
+                        <td class="text-dark">@film.Year</td>
+                        <td class="text-dark">@film.Director</td>
+                        <td class="text-dark">@film.MyRate</td>
+
                     </tr>
                 }
             }

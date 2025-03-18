@@ -10,7 +10,7 @@ namespace CloudProject2025.Models
 
         public ElencoFilm()
         {
-            NomeElenco = "Test ElencoFilm MVC";
+            
             ListaFilm = new List<Film>();
         }
 
