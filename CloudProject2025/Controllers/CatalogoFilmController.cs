@@ -22,30 +22,54 @@ public class CatalogoFilmController : Controller
         return View(vm);
     }
 
-
-   
-    
-
     [HttpPost]
     public async Task<IActionResult> Search(string title, int year)
     {
         var film = await _omdbService.GetFilmAsync(title, year);
 
-        if (film == null)
-        {
-            return NotFound("Film non trovato");
-        }
+
 
         var viewModel = new CatalogoFilmRicercaFilmViewModel
         {
             ElencoFilm = new ElencoFilm
             {
-                NomeElenco = "Risultati ricerca",
-                ListaFilm = new List<Film> { film }
+                NomeElenco = "Risultati ricerca"
+
             }
         };
+
+        if (film != null)
+        {
+            viewModel.ElencoFilm.ListaFilm = new List<Film> { film };
+        }
+
 
         return View("RicercaFilm", viewModel);
     }
 
-}
+        [HttpPost]
+
+        public async Task<IActionResult> AddFilm(int id,string title,string plot,int year,string genre,string director,float myRate)
+        {
+            var nuovoFilm = new Film
+            {
+                Id = id,
+                Title = title,
+                Plot = plot,
+                Year = year,
+                Genre = genre,
+                Director = director,
+                MyRate = myRate,
+
+            };
+
+        MemoriaStatica.ElencoFilm.ListaFilm.Add(nuovoFilm);
+        return Redirect("/CatalogoFilm/CatalogoFilm");
+
+
+        }
+
+
+
+    }
+

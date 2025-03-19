@@ -9,7 +9,7 @@
         <form asp-controller="CatalogoFilm" asp-action="Search" method="post">
             <div class="input-group">
                 <input type="text" name="title" class="form-control border-primary" placeholder="Inserisci il titolo... *" required />
-                <input type="number" name="year" class="form-control border-primary" placeholder="Inserisci anno..." />
+                <input type="number" name="year" min="1800" max="2100" class="form-control border-primary" placeholder="Inserisci anno..." />
                 <button type="submit" class="btn btn-primary">Cerca</button>
             </div>
         </form>

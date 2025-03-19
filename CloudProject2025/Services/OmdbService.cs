@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using CloudProject2025.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace CloudProject2025.Services
@@ -31,10 +32,18 @@ namespace CloudProject2025.Services
             }
             var response = await _httpClient.GetAsync(url);
             var contents = await response.Content.ReadAsStringAsync();
-            
-            Film oggettoFilm = JsonConvert.DeserializeObject<Film>(contents);
 
-            return oggettoFilm;
+            // Controlla se la risposta contiene un errore
+            var jsonObj = JsonConvert.DeserializeObject<JObject>(contents);
+            if (jsonObj?["Response"]?.ToString() == "False")
+            {
+                return null; // Nessun film trovato
+            }
+
+            // Se la risposta è valida, deserializza in un oggetto Film
+            return JsonConvert.DeserializeObject<Film>(contents);
+
+
         }
     }
 
