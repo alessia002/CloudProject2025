@@ -8,7 +8,7 @@ namespace CloudProject2025.Models
         [Required]
         public string? Title { get; set; }
         public string? Plot { get; set; }
-        public int Year { get; set; }
+        public string? Year { get; set; }
         [Required]
         public string? Genre{ get; set; }
         [Required]

@@ -13,8 +13,8 @@
                 
                 <th>Titolo</th>
                 <th>Trama</th>
-                <th>Anno</th>
                 <th>Genere</th>
+                <th>Anno</th>
                 <th>Regista</th>
                 <th>Valutazione</th>
             </tr>
@@ -31,7 +31,9 @@
                         <td class="text-dark">@film.Genre</td>
                         <td class="text-dark">@film.Year</td>
                         <td class="text-dark">@film.Director</td>
-                        <td class="text-dark">@film.MyRate</td>
+                        <td class="text-dark">
+                            <input type="number" class="form-control" name="ratings" value="@film.MyRate" min="0" max="10" step="0.1"/>
+                        </td>
 
                     </tr>
                 }
@@ -39,7 +41,7 @@
             else
             {
                 <tr>
-                    <td colspan="6" class="text-center text-dark">Non ci sono film disponibili</td>
+                    <td colspan="8" class="text-center text-dark">Non ci sono film disponibili</td>
                 </tr>
             }
             </tbody>

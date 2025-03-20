@@ -49,7 +49,7 @@ public class CatalogoFilmController : Controller
 
         [HttpPost]
 
-        public async Task<IActionResult> AddFilm(int id,string title,string plot,int year,string genre,string director,float myRate)
+        public async Task<IActionResult> AddFilm(int id,string title,string plot,string year,string genre,string director,float myRate)
         {
             var nuovoFilm = new Film
             {
