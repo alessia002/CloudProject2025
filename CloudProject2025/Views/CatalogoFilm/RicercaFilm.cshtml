@@ -28,16 +28,11 @@
                             <tr>
                                 <td>
                                 <form method="post" asp-action="AddFilm" asp-controller="CatalogoFilm">
-                                    <input type="hidden" name="id" value="@film.Id" />
                                     <input type="hidden" name="title" value="@film.Title" />
                                     <input type="hidden" name="plot" value="@film.Plot" />
                                     <input type="hidden" name="year" value="@film.Year" />
                                     <input type="hidden" name="genre" value="@film.Genre" />
                                     <input type="hidden" name="director" value="@film.Director" />
-
-
-
-
                                     <button type="submit" class="btn btn-warning btn-sm"> + </button>
                                 </form>
                             </td>

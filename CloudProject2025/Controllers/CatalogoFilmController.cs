@@ -28,13 +28,11 @@ public class CatalogoFilmController : Controller
         var film = await _omdbService.GetFilmAsync(title, year);
 
 
-
         var viewModel = new CatalogoFilmRicercaFilmViewModel
         {
             ElencoFilm = new ElencoFilm
             {
                 NomeElenco = "Risultati ricerca"
-
             }
         };
 
@@ -47,46 +45,46 @@ public class CatalogoFilmController : Controller
         return View("RicercaFilm", viewModel);
     }
 
-        [HttpPost]
-
-        public async Task<IActionResult> AddFilm(int id,string title,string plot,string year,string genre,string director,float myRate)
+    [HttpPost]
+    public async Task<IActionResult> AddFilm(string title, string plot, string year, string genre,
+        string director, float myRate)
+    {
+        var nuovoFilm = new Film
         {
-            var nuovoFilm = new Film
-            {
-                Id = id,
-                Title = title,
-                Plot = plot,
-                Year = year,
-                Genre = genre,
-                Director = director,
-                MyRate = myRate,
-
-            };
+            Id = MemoriaStatica.GetNewId(),
+            Title = title,
+            Plot = plot,
+            Year = year,
+            Genre = genre,
+            Director = director,
+            MyRate = myRate,
+        };
 
         MemoriaStatica.ElencoFilm.ListaFilm.Add(nuovoFilm);
         return Redirect("/CatalogoFilm/CatalogoFilm");
+    }
 
-
-        }
     [HttpPost]
-    public async Task<IActionResult> UpdateFilm(int id, string title, string plot, string year, string genre, string director, float myRate)
+    public async Task<IActionResult> UpdateFilm(List<Film> films)
     {
-        var film = MemoriaStatica.ElencoFilm.ListaFilm.FirstOrDefault(f => f.Id == id);
-
-        if (film == null)
+        foreach (var updatedFilm in films)
         {
-            return NotFound(new { message = "Film non trovato" });
-        }
+            var film = MemoriaStatica.ElencoFilm.ListaFilm.FirstOrDefault(f => f.Id == updatedFilm.Id);
 
-        // Aggiorno i dettagli del film
-        film.Title = title;
-        film.Plot = plot;
-        film.Year = year;
-        film.Genre = genre;
-        film.Director = director;
-        film.MyRate = myRate;
+            if (film == null)
+            {
+                return NotFound(new { message = "Film non trovato" });
+            }
+
+            // Aggiorno i dettagli del film
+            film.Title = updatedFilm.Title;
+            film.Plot = updatedFilm.Plot;
+            film.Year = updatedFilm.Year;
+            film.Genre = updatedFilm.Genre;
+            film.Director = updatedFilm.Director;
+            film.MyRate = updatedFilm.MyRate;
+        }
 
         return Redirect("/CatalogoFilm/CatalogoFilm");
     }
-    }
-
+}
