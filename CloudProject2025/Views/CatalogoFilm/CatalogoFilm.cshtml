@@ -6,7 +6,7 @@
 <div class="container mt-5 d-flex justify-content-center">
     <div class="p-4 bg-light border rounded shadow-lg" style="max-width: 900px; width: 100%;">
         <h1 class="text-dark text-center">Catalogo</h1>
-
+        <form method="post" asp-action="UpdateFilm">
         <table class="table border border-primary table-striped">
             <thead class="bg-primary text-white">
             <tr>
@@ -32,10 +32,17 @@
                         <td class="text-dark">@film.Year</td>
                         <td class="text-dark">@film.Director</td>
                         <td class="text-dark">
-                            <input type="number" class="form-control" name="ratings" value="@film.MyRate" min="0" max="10" step="0.1"/>
+                                            <input type="hidden" name="id" value="@film.Id" />
+                                        <input type="hidden" name="title" value="@film.Title" />
+                                        <input type="hidden" name="year" value="@film.Year" />
+                                        <input type="hidden" name="plot" value="@film.Plot" />
+                                        <input type="hidden" name="genre" value="@film.Genre" />
+                                        <input type="hidden" name="director" value="@film.Director" />
+                                        <input type="number" name="myRate" value="@film.MyRate" class="form-control" step="0.1" min="0" max="10" />
                         </td>
-
+                                
                     </tr>
+                    
                 }
             }
             else
@@ -44,7 +51,11 @@
                     <td colspan="8" class="text-center text-dark">Non ci sono film disponibili</td>
                 </tr>
             }
-            </tbody>
-        </table>
+
+            </tbody><td colspan="8" class="text-end text-dark">
+            <button type="submit" class="btn btn-warning btn-sm"> Salva
+                </td>
+                </button>
+        </table></form>
     </div>
 </div>

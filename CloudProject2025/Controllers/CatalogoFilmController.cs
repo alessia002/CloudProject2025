@@ -68,8 +68,25 @@ public class CatalogoFilmController : Controller
 
 
         }
+    [HttpPost]
+    public async Task<IActionResult> UpdateFilm(int id, string title, string plot, string year, string genre, string director, float myRate)
+    {
+        var film = MemoriaStatica.ElencoFilm.ListaFilm.FirstOrDefault(f => f.Id == id);
 
+        if (film == null)
+        {
+            return NotFound(new { message = "Film non trovato" });
+        }
 
+        // Aggiorno i dettagli del film
+        film.Title = title;
+        film.Plot = plot;
+        film.Year = year;
+        film.Genre = genre;
+        film.Director = director;
+        film.MyRate = myRate;
 
+        return Redirect("/CatalogoFilm/CatalogoFilm");
+    }
     }
 
