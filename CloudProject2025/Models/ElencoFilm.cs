@@ -22,10 +22,17 @@ namespace CloudProject2025.Models
             ListaFilm.Add(film);
         }
 
-        public void EliminaFilm(Film film)
+        public bool EliminaFilm(int filmId)
         {
-            ListaFilm.Remove(film);
+            var film = ListaFilm.FirstOrDefault(f => f.Id == filmId);
+            if (film != null)
+            {
+                ListaFilm.Remove(film);
+                return true;
+            }
+            return false;
         }
+
 
 
         public Film[] Ricerca(string parametroRicerca)

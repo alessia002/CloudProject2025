@@ -87,4 +87,24 @@ public class CatalogoFilmController : Controller
 
         return Redirect("/CatalogoFilm/CatalogoFilm");
     }
-}
+
+    
+    public async Task<IActionResult> DeleteFilm(int filmId)
+    {
+        if (filmId == null)
+        {
+            return BadRequest(new { message = "Nessun film selezionato per l'eliminazione" });
+        }
+
+
+        if (!MemoriaStatica.ElencoFilm.EliminaFilm(filmId))
+        {
+            return NotFound(new { message = $"Film con ID {filmId} non trovato" });
+        }
+
+
+        return RedirectToAction("CatalogoFilm");
+    }
+
+
+    }

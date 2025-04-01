@@ -9,53 +9,60 @@
         <form method="post" asp-action="UpdateFilm">
             <table class="table border border-primary table-striped">
                 <thead class="bg-primary text-white">
-                <tr>
-
-                    <th>Titolo</th>
-                    <th>Trama</th>
-                    <th>Genere</th>
-                    <th>Anno</th>
-                    <th>Regista</th>
-                    <th>Valutazione</th>
-                </tr>
+                    <tr>
+                        <th>Titolo</th>
+                        <th>Trama</th>
+                        <th>Genere</th>
+                        <th>Anno</th>
+                        <th>Regista</th>
+                        <th>Valutazione</th>
+                        <th>Azioni</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @if (Model.ElencoFilm.ListaFilm.Any())
-                {
-                    @for (int i = 0; i < Model.ElencoFilm.ListaFilm.Count; i++)
+                    @if (Model.ElencoFilm.ListaFilm.Any())
                     {
-                        var film = Model.ElencoFilm.ListaFilm[i];
+                        @for (int i = 0; i < Model.ElencoFilm.ListaFilm.Count; i++)
+                        {
+                            var film = Model.ElencoFilm.ListaFilm[i];
 
+                            <tr>
+                                <td class="text-dark">@film.Title</td>
+                                <td class="text-dark">@film.Plot</td>
+                                <td class="text-dark">@film.Genre</td>
+                                <td class="text-dark">@film.Year</td>
+                                <td class="text-dark">@film.Director</td>
+                                <td class="text-dark">
+                                    <input type="hidden" name="films[@i].Id" value="@film.Id" />
+                                    <input type="hidden" name="films[@i].Title" value="@film.Title" />
+                                    <input type="hidden" name="films[@i].Year" value="@film.Year" />
+                                    <input type="hidden" name="films[@i].Plot" value="@film.Plot" />
+                                    <input type="hidden" name="films[@i].Genre" value="@film.Genre" />
+                                    <input type="hidden" name="films[@i].Director" value="@film.Director" />
+                                    <input type="number" name="films[@i].MyRate" value="@film.MyRate" class="form-control" step="0.1"
+                                           min="0" max="10" />
+                                </td>
+                                <td>
+                                    <a asp-action="DeleteFilm" asp-controller="CatalogoFilm" class="btn btn-danger btn-sm">
+                                       Elimina
+
+                                    </a>
+
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
                         <tr>
-                            <td class="text-dark">@film.Title</td>
-                            <td class="text-dark">@film.Plot</td>
-                            <td class="text-dark">@film.Genre</td>
-                            <td class="text-dark">@film.Year</td>
-                            <td class="text-dark">@film.Director</td>
-                            <td class="text-dark">
-                                <input type="hidden" name="films[@i].Id" value="@film.Id"/>
-                                <input type="hidden" name="films[@i].Title" value="@film.Title"/>
-                                <input type="hidden" name="films[@i].Year" value="@film.Year"/>
-                                <input type="hidden" name="films[@i].Plot" value="@film.Plot"/>
-                                <input type="hidden" name="films[@i].Genre" value="@film.Genre"/>
-                                <input type="hidden" name="films[@i].Director" value="@film.Director"/>
-                                <input type="number" name="films[@i].MyRate" value="@film.MyRate" class="form-control" step="0.1"
-                                       min="0" max="10"/>
-                            </td>
+                            <td colspan="8" class="text-center text-dark">Non ci sono film disponibili</td>
                         </tr>
                     }
-
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="8" class="text-center text-dark">Non ci sono film disponibili</td>
-                    </tr>
-                }
-
                 </tbody>
                 <td colspan="8" class="text-end text-dark">
-                    <button type="submit" class="btn btn-warning btn-sm"> Salva
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        Salva
                     </button>
                 </td>
             </table>

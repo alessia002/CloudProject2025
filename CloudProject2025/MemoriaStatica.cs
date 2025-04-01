@@ -11,8 +11,12 @@ public class MemoriaStatica
     public static Models.ElencoFilm ElencoFilm = new Models.ElencoFilm();
 
     public static int GetNewId()
-    {
-        return ++idFilm;
+    { 
+
+        return idFilm++;
+
     }
+
+    
 
 }
