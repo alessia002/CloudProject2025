@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CloudProject2025.Controllers;
 
+
 public class CatalogoFilmController : Controller
 {
     private readonly OmdbService _omdbService;
@@ -85,25 +86,50 @@ public class CatalogoFilmController : Controller
             film.MyRate = updatedFilm.MyRate;
         }
 
-        return Redirect("/CatalogoFilm/CatalogoFilm");
+        return Redirect("/Home/Index");
     }
-
     
-    public async Task<IActionResult> DeleteFilm(int filmId)
+    [HttpPost]
+    public async Task<IActionResult> DeleteFilm(List<int> selectedFilms)
     {
-        if (filmId == null)
+        if (selectedFilms == null || !selectedFilms.Any())
         {
             return BadRequest(new { message = "Nessun film selezionato per l'eliminazione" });
         }
 
+        bool allDeleted = true;
 
-        if (!MemoriaStatica.ElencoFilm.EliminaFilm(filmId))
+        foreach (var filmId in selectedFilms)
         {
-            return NotFound(new { message = $"Film con ID {filmId} non trovato" });
+            if (!MemoriaStatica.ElencoFilm.EliminaFilm(filmId))
+            {
+                allDeleted = false;
+            }
         }
 
+        if (!allDeleted)
+        {
+            return NotFound(new { message = "Alcuni film non sono stati trovati e non sono stati eliminati." });
+        }
 
         return RedirectToAction("CatalogoFilm");
+    }
+
+    [HttpPost]
+    public IActionResult GestisciFilm(string actionType, List<int> selectedFilms, List<Film> films)
+    {
+        if (actionType.Equals("update"))
+        {
+            UpdateFilm(films);
+            return Redirect("/Home/Index");
+        }
+        else if (actionType.Equals("delete"))
+        {
+            DeleteFilm(selectedFilms);
+            return RedirectToAction("CatalogoFilm");
+        }
+
+        return BadRequest("Azione non valida.");
     }
 
 
